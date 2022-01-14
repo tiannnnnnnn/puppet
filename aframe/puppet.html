@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>puppet</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="scripts/aframe-draw-shader.js"></script>
+    <script src="scripts/aframe-video-player.js"></script>
+    <script src="scripts/aframe-render-order-component.js"></script>
+    <script src="scripts/aframe-change-scene.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <video id="bg0" src="./videos/start02.mp4" crossOrigin="" ></video>
+            
+            <img id="bg1" crossorigin="anonymous" src="./images/第1幕.png">
+
+            <img id="bg2" crossorigin="anonymous" src="./images/第2幕.png">
+
+            <img id="bg3" crossorigin="anonymous" src="./images/第3幕.png">
+            
+            <img id="bg4" crossorigin="anonymous" src="./images/第4幕.png">
+
+            <img id="bg5" crossorigin="anonymous" src="./images/第5幕_05.png">
+
+            <img id="bg_be" crossorigin="anonymous" src="./images/be.png">
+
+            <img id="bg_he" crossorigin="anonymous" src="./images/he.png">
+        </a-assets>
+
+        <a-camera>
+            <a-cursor color="#fff" cursor="fuse: true; fuseTimeout: 2000" raycaster="objects: [visible=true] [raycastable=true]"></a-cursor>
+            <a-sky id="fadePanel" render-order="9999" radius="0.3" color="#000" material="transparent: true; opacity: 0.0;"
+                animation__fadeOut="property: material.opacity; startEvents: fadeOut; easing: linear; dur: 500; to: 1.0"
+                animation__fadeIn="property: material.opacity; startEvents: fadeIn; easing: linear; dur: 500; to: 0.0">
+            </a-sky>
+        </a-camera>
+
+        <a-entity id="scene0" scene visible="true">
+            <a-sky color="#fff"></a-sky>
+
+
+            <a-triangle position="0 1.5 -8" color="#fff" rotation="0 0 -90" raycastable="true"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                proxy-event="event: click; as: play-video; to: #video-start;">
+
+            </a-triangle>
+
+            <!-- <a-box position="0 -1 -8" raycastable="true" visible="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                proxy-event="event: click; as: play-video; to: #video-start;">
+
+            </a-box> -->
+
+            <a-videosphere id="video-start" src="#bg0"
+                video-player="playEvent: play-video; onEndEvent: ended;"
+                event-set="_event: play-video; visible: true;"
+                event-set__show-start-btn="_event: ended; _target: #start-btn; raycastable: true; visible: true;">
+            </a-videosphere>
+            
+            <a-plane id="start-btn" fuse-button="color: #fff; barColor: #7c98b3; fuseTimeout: 2000;" width="3" position="0 -2 -10"
+                visible="false" raycastable="false" 
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene1; fadePanel: #fadePanel;"
+                event-set__show-select-btn1="_event:click; _target: #btn1-1; raycastable: true; visible: true;"
+                event-set__show-select-btn2="_event: click; _target: #btn1-2; raycastable: true; visible: true;"
+                event-set__show-select-btn3="_event: click; _target: #btn1-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:開始; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 2;" position="0 -0.05 0.015"></a-plane>
+            </a-plane> -->
+            <!-- 開始 -->
+
+            
+        </a-entity>
+
+        <a-entity id="scene1" scene visible="false"> 
+            <a-sky src="#bg1"></a-sky>
+            
+            <a-plane color="#fff" 
+                width="20" position="0 -1 -8">
+                <a-plane draw-text="text:「你要升大學了 雖然你有你的興趣 但爸媽還是希望你學比較賺錢的科系啦」; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+            <!-- 問題1 -->
+
+            <a-plane id="btn1-1" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 2000;" 
+                width="3" position="-5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene2; fadePanel: #fadePanel;"
+                event-set__show-select-btn2-1="_event: click; _target: #btn2-1; raycastable: true; visible: true;"
+                event-set__show-select-btn2-2="_event: click; _target: #btn2-2; raycastable: true; visible: true;"
+                event-set__show-select-btn2-3="_event: click; _target: #btn2-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:選醫科; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項1-1 -->
+            
+            <a-plane id="btn1-2" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 2000;" 
+                width="3" position="5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene2; fadePanel: #fadePanel;"
+                event-set__show-select-btn2-1="_event: click; _target: #btn2-1; raycastable: true; visible: true;"
+                event-set__show-select-btn2-2="_event: click; _target: #btn2-2; raycastable: true; visible: true;"
+                event-set__show-select-btn2-3="_event: click; _target: #btn2-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:選法律; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項1-2 -->
+
+            <a-plane id="btn1-3" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="5" position="0 13 0" rotation="90 0 0" 
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_he; fadePanel: #fadePanel;"
+                event-set__show-select-btn_he="_event: click; _target: #btn_he; raycastable: true; visible: true;">
+                <a-plane draw-text="text:讀興趣相關科系; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項1-3 -->
+
+        </a-entity>
+
+        <a-entity id="scene2" scene visible="false">
+            <a-sky src="#bg2"></a-sky>
+
+            <a-plane color="#fff" 
+                width="15" position="0 -1 -8">
+                <a-plane draw-text="text:「好想體驗看看自己喜歡的活動 但還是務實一點好了」; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+            <!-- 問題2 -->
+
+            <a-plane id="btn2-1" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="7" position="-5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene3; fadePanel: #fadePanel;"
+                event-set__show-select-btn3-1="_event: click; _target: #btn3-1; raycastable: true; visible: true;"
+                event-set__show-select-btn3-2="_event: click; _target: #btn3-2; raycastable: true; visible: true;"
+                event-set__show-select-btn3-3="_event: click; _target: #btn3-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:在餐飲業打工存錢; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項2-1 -->
+            
+            <a-plane id="btn2-2" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="8" position="5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene3; fadePanel: #fadePanel;"
+                event-set__show-select-btn3-1="_event: click; _target: #btn3-1; raycastable: true; visible: true;"
+                event-set__show-select-btn3-2="_event: click; _target: #btn3-2; raycastable: true; visible: true;"
+                event-set__show-select-btn3-3="_event: click; _target: #btn3-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:認真唸書準備畢業就工作; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項2-2 -->
+
+            <a-plane id="btn2-3" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="10" position="0 13 0" rotation="90 0 0" 
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_he; fadePanel: #fadePanel;"
+                event-set__show-select-btn_he="_event: click; _target: #btn_he; raycastable: true; visible: true;">
+                <a-plane draw-text="text:參加喜歡的活動 全心全意發掘興趣; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項2-3 -->
+            
+        </a-entity>
+
+        <a-entity id="scene3" scene visible="false">
+            <a-sky src="#bg3"></a-sky>
+
+            <a-plane color="#fff" 
+                width="15" position="0 -1 -8">
+                <a-plane draw-text="text:「叫你辦的事都辦不好 新人就是要好好的聽人差遣啊」; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+            <!-- 問題3 -->
+
+            <a-plane id="btn3-1" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="6" position="-5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene4; fadePanel: #fadePanel;"
+                event-set__show-select-btn4-1="_event: click; _target: #btn4-1; raycastable: true; visible: true;"
+                event-set__show-select-btn4-2="_event: click; _target: #btn4-2; raycastable: true; visible: true;"
+                event-set__show-select-btn4-3="_event: click; _target: #btn4-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:馬上道歉 阿諛奉承; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項3-1 -->
+            
+            <a-plane id="btn3-2" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="7" position="5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene4; fadePanel: #fadePanel;"
+                event-set__show-select-btn4-1="_event: click; _target: #btn4-1; raycastable: true; visible: true;"
+                event-set__show-select-btn4-2="_event: click; _target: #btn4-2; raycastable: true; visible: true;"
+                event-set__show-select-btn4-3="_event: click; _target: #btn4-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:忍氣吞聲 私底下說壞話; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項3-2 -->
+
+            <a-plane id="btn3-3" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="13" position="0 13 0" rotation="90 0 0" 
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_he; fadePanel: #fadePanel;"
+                event-set__show-select-btn_he="_event: click; _target: #btn_he; raycastable: true; visible: true;">
+                <a-plane draw-text="text:向一直都不喜歡的公司辭職 去做想做的事; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項3-3 -->
+            
+        </a-entity>
+
+        <a-entity id="scene4" scene visible="false">
+            <a-sky src="#bg4"></a-sky>
+
+            <a-plane color="#fff" 
+                width="25" position="0 -1 -8">
+                <a-plane draw-text="text:「爸媽知道你辛辛苦苦走到這裡 終於可以做想做的事 但是這個年紀再不找個人結婚就晚了」; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+            <!-- 問題4 -->
+
+            <a-plane id="btn4-1" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="6" position="-5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene5; fadePanel: #fadePanel;"
+                event-set__show-select-btn5-1="_event: click; _target: #btn5-1; raycastable: true; visible: true;"
+                event-set__show-select-btn5-2="_event: click; _target: #btn5-2; raycastable: true; visible: true;"
+                event-set__show-select-btn5-3="_event: click; _target: #btn5-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:上交友軟體找對象; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項4-1 -->
+            
+            <a-plane id="btn4-2" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="6" position="5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene5; fadePanel: #fadePanel;"
+                event-set__show-select-btn4-1="_event: click; _target: #btn5-1; raycastable: true; visible: true;"
+                event-set__show-select-btn4-2="_event: click; _target: #btn5-2; raycastable: true; visible: true;"
+                event-set__show-select-btn4-3="_event: click; _target: #btn5-3; raycastable: true; visible: true;">
+                <a-plane draw-text="text:接受家人的介紹; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項4-2 -->
+
+            <a-plane id="btn4-3" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="14" position="0 13 0" rotation="90 0 0" 
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_he; fadePanel: #fadePanel;"
+                event-set__show-select-btn_he="_event: click; _target: #btn_he; raycastable: true; visible: true;">
+                <a-plane draw-text="text:回絕 一定要的話等到完成想做的事再結婚也不遲; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項4-3 -->
+            
+        </a-entity>
+
+        <a-entity id="scene5" scene visible="false">
+            <a-sky src="#bg5"></a-sky>
+
+            <a-plane color="#fff" 
+                width="25" position="0 -1 -8">
+                <a-plane draw-text="text:「我知道你很需要自己的時間來追尋自己想要的事物 但年紀也不小了 什麼時候可以有小孩？」; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+            <!-- 問題5 -->
+
+            <a-plane id="btn5-1" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="7" position="-5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_be; fadePanel: #fadePanel;"
+                event-set__show-select-restart="_event: click; _target: #restart; raycastable: true; visible: true;">
+                <a-plane draw-text="text:按照對方想法 今年就生; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項5-1 -->
+            
+            <a-plane id="btn5-2" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="9" position="5 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_be; fadePanel: #fadePanel;"
+                event-set__show-select-restart="_event: click; _target: #restart; raycastable: true; visible: true;">
+                <a-plane draw-text="text:做好養育孩子的準備 一年後再生; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項5-2 -->
+
+            <a-plane id="btn5-3" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" 
+                width="17" position="0 13 0" rotation="90 0 0" 
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                change-scene="event: click; to: #scene_he; fadePanel: #fadePanel;"
+                event-set__show-select-btn_he="_event: click; _target: #btn_he; raycastable: true; visible: true;">
+                <a-plane draw-text="text:好好溝通 等到自己完成想做的事 心有餘力時再全心養育小孩; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 -0.05 0.015"></a-plane>
+            </a-plane>
+            <!-- 選項5-3 -->
+            
+        </a-entity>
+
+
+        <a-entity id="scene_be" scene visible="false">
+            <a-sky src="#bg_be"></a-sky>
+
+            <a-plane color="#fff" 
+                width="8" position="0 -1 -8">
+                <a-plane draw-text="text:爸爸、媽媽，夢想是什麼？; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+
+            <a-plane id="restart" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" width="4" position="0 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                event-set__show-select-btn1-1="_event: click; _target: #btn1-1; raycastable: true; visible: true;"
+                event-set__show-select-btn1-2="_event: click; _target: #btn1-2; raycastable: true; visible: true;"
+                change-scene="event: click; to: #scene1; fadePanel: #fadePanel;"
+                >
+                <a-plane draw-text="text:重試一次; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 0 0.02"></a-plane>
+            </a-plane>
+            <!-- 重新按鈕 -->
+        </a-entity>
+
+        <a-entity id="scene_he" scene visible="false">
+            <a-sky src="#bg_he"></a-sky>
+
+            <a-plane color="#fff" 
+                width="12" position="0 -1 -8">
+                <a-plane draw-text="text:「沒有什麼比成為自己想要的樣子更重要」; color: #7c98b3; strokeColor: #7c98b3; strokeWidth: 1;" 
+                    position="0 -0.05 0.015">
+                </a-plane>
+            </a-plane>
+
+            <a-plane id="btn_he" fuse-button="color: #7c98b3; barColor: #fff; fuseTimeout: 1500;" width="4" position="0 -3 -8"
+                visible="false" raycastable="false"
+                event-set__hide="_event: click; raycastable: false; visible: false; _delay: 300;"
+                event-set__show-select-btn1-1="_event: click; _target: #btn1-1; raycastable: true; visible: true;"
+                event-set__show-select-btn1-2="_event: click; _target: #btn1-2; raycastable: true; visible: true;"
+                change-scene="event: click; to: #scene1; fadePanel: #fadePanel;"
+                >
+                <a-plane draw-text="text:重試一次; color: #fff; strokeColor: #7c98b3; strokeWidth: 5;" position="0 0 0.02"></a-plane>
+            </a-plane>
+            <!-- 重新按鈕 -->
+        </a-entity>
+
+        
+
+
+        
+
+        
+
+        
+
+        
+    </a-scene>
+</body>
+
+</html>
